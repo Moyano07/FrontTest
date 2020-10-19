@@ -1,0 +1,14 @@
+div{
+  --border-width: 0 !important;
+  --min-height: 18px;
+  margin-top: 1px;
+  margin-bottom: 7px;
+  font-size: small;
+  display: block;
+  transition: all ease 0.5s;
+  opacity: 0;
+
+  &.hydrated {
+    opacity: 1;
+  }
+}
