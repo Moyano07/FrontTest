@@ -16,16 +16,12 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   public login(formData: any) {
-    return this.http.post('login', formData).pipe(
+    return this.http.post('login_check', formData).pipe(
       tap(({ token }: any) => localStorage.setItem('[test] token', token)),
     );
   }
 
   
-
-  getPermissions(): any {
-    return this.http.get(`/authorization/list`);
-  }
 
   public logout = () => {
     localStorage.clear();
