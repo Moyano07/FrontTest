@@ -15,8 +15,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  public login(formData: any) {
-    return this.http.post('login_check', formData).pipe(
+  public login({username,password}) {
+    return this.http.post('login_check', {username,password}).pipe(
       tap(({ token }: any) => localStorage.setItem('[test] token', token)),
     );
   }
@@ -29,5 +29,5 @@ export class AuthService {
     this.router.navigate(['/', 'auth', 'login']);
   };
 
-  
+   
 }

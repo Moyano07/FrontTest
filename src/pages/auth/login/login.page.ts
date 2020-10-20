@@ -13,13 +13,17 @@ import { map, switchMap,catchError,tap, filter } from 'rxjs/operators';
 
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss']
 })
-export class LoginPage {
+
+
+export class LoginPage implements OnInit{
   loading:boolean =false;
+  form: FormGroup;
   constructor( 
     private fb: FormBuilder,  
     private router: Router,
@@ -29,26 +33,28 @@ export class LoginPage {
 
   public onSubmit$: Subject<FormGroup> = new Subject();
 
-  form: FormGroup = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required]
-  });
+ 
     
   
 
-  sendForm$ = (formData: FormData) => {
-    return this.authService.login(formData);
+  sendForm$ = () => {
+    return switchMap(() =>this.authService.login(this.form.value));
   };
 
   
   ngOnInit() {
+    this.form = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
   this.onSubmit$
       .pipe(
         
         this.processForm$(),
         tap(()=>this.loading =true),
-        map((form: FormGroup) => this.getFormData(form)),
-        switchMap((formData) => this.sendForm$(formData).pipe(catchError((error) => of({ error })))),
+        
+        this.sendForm$(),
         tap(()=>this.loading =false),
       )
       .subscribe(
