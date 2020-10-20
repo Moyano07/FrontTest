@@ -23,6 +23,7 @@ import { map, switchMap,catchError,tap, filter } from 'rxjs/operators';
 
 export class LoginPage implements OnInit{
   loading:boolean =false;
+  errorLogin:boolean =false;
   form: FormGroup;
   constructor( 
     private fb: FormBuilder,  
@@ -33,12 +34,10 @@ export class LoginPage implements OnInit{
 
   public onSubmit$: Subject<FormGroup> = new Subject();
 
- 
-    
-  
-
   sendForm$ = () => {
-    return switchMap(() =>this.authService.login(this.form.value));
+    return switchMap(() =>this.authService.login(this.form.value).pipe(
+      catchError(_ => of(this.errorLogin = true)
+    )));
   };
 
   
@@ -50,32 +49,17 @@ export class LoginPage implements OnInit{
 
   this.onSubmit$
       .pipe(
-        
         this.processForm$(),
         tap(()=>this.loading =true),
-        
         this.sendForm$(),
         tap(()=>this.loading =false),
       )
       .subscribe(
+        
         success => success ? this.router.navigate(['/home']) : null
       );
     }
 
-    getFormData = (form: FormGroup) => {
-      const formData = new FormData();
-      
-      for (const [key, value] of Object.entries(form)) {
-        if (value !== undefined) {
-          formData.append(key, value);
-          continue;
-        }
-        
-        formData.set(key, value);
-      }
-  
-      return formData;
-    };
 
     public processForm$() {
       return switchMap((formGroup: FormGroup) =>
@@ -90,7 +74,6 @@ export class LoginPage implements OnInit{
               form.get('data').markAllAsTouched();
             }
             this.loading =false;
-            //alert('ALERT.INVALID_FORM');
           }),
           filter(form => form.valid),
           map(form => form.value)

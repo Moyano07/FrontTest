@@ -1,36 +1,22 @@
-<div class="constainer">
-    <div  class="d-flex flex-lg-row flex-md-row  flex-sm-column flex-column justify-content-center align-items-center ">
-        <div class="card m-2" style="width: 14rem;">
-            <img src="https://www.gstatic.com/webp/gallery/4.sm.jpg" class="card-img-top">
-            <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+
+<nav class="navbar d-flex justify-content-between  navbar-light blue lighten-4">
+    <span class="navbar-brand">HOME</span>
+    <button class="btn"><span>Create Project</span></button>
+  </nav>
+<div class="container">
+    
+    <div *ngIf="resourceProjects$ | async as projects;"  class="d-flex flex-wrap flex-lg-row flex-md-row  flex-sm-column flex-column justify-content-center align-items-center ">
+        <ng-container *ngFor="let project of projects; let i = index; trackBy: trackBy">
+    
+            <div class="card m-2" style="min-width:300px;width: 14rem;">
+                <img src="https://www.gstatic.com/webp/gallery/4.sm.jpg" class="card-img-top" alt="https://www.gstatic.com/webp/gallery/4.sm.jpg" class="card-img-top">
+                <div class="card-body">
+                <h5 class="card-title">{{project.name}}</h5>
+                <p class="card-text">{{project.description}}</p>
+                <a href="#" class="btn btn-primary">Detail</a>
+                </div>
             </div>
-        </div>
-        <div class="card m-2" style="width: 14rem;">
-            <img src="https://www.gstatic.com/webp/gallery/4.sm.jpg" class="card-img-top">
-            <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-        <div class="card m-2" style="width: 14rem;">
-            <img src="https://www.gstatic.com/webp/gallery/4.sm.jpg" class="card-img-top">
-            <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-        <div class="card m-2" style="width: 14rem;">
-            <img src="https://www.gstatic.com/webp/gallery/4.sm.jpg" class="card-img-top">
-            <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
+        </ng-container>
     </div>
+    
 </div>

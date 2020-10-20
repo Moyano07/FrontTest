@@ -24,7 +24,9 @@
                                   <app-input-error [control]="this.form.get('password')" [message]="'password'"></app-input-error>
                                 </div>
 
-                              <br><br>
+                              <br>
+                              <span *ngIf="errorLogin" style="color:red">Ups..! Error username or password</span>
+                              <br>
                               <button type="submit" class="btn btn-success btn-lg float-right" >Login</button>
                           </form>
                       </div>
