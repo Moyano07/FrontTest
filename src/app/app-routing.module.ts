@@ -26,9 +26,7 @@ const routes: Routes = [
    canActivate: [AuthGuard]
   },
 
-  { path: 'create-tasks/:projectId/:taskId', loadChildren: () => import('../pages/tasks/create-tasks/create-tasks.module').then(m => m.CreateTasksModule), 
-   canActivate: [AuthGuard]
-  },
+  
 
 
   
