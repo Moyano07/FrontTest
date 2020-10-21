@@ -16,7 +16,22 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('../pages/home/home.module').then(m => m.HomeModule),
     canActivate: [AuthGuard]
-  }, 
+  },
+
+  { path: 'project/tasks/:id', loadChildren: () => import('../pages/tasks/tasks.module').then(m => m.TasksModule),
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'create-tasks/:projectId', loadChildren: () => import('../pages/tasks/create-tasks/create-tasks.module').then(m => m.CreateTasksModule), 
+   canActivate: [AuthGuard]
+  },
+
+  { path: 'create-tasks/:projectId/:taskId', loadChildren: () => import('../pages/tasks/create-tasks/create-tasks.module').then(m => m.CreateTasksModule), 
+   canActivate: [AuthGuard]
+  },
+
+
+  
   
   
 ];

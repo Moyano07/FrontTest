@@ -14,5 +14,8 @@ export class ProjectService {
 
   create = (params) => this.http.post(`project/create`, params);
 
-  updateShop = (data) => this.http.post(`project/update`, data);
+  update = (data) => this.http.post(`project/update`, data);
+
+  delete = (params) => this.http.delete(`project/delete`,{params});
+
 }
