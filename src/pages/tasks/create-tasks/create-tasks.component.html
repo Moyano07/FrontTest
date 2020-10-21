@@ -1,0 +1,24 @@
+<app-spinner [loading]="loading"></app-spinner>
+<nav class="navbar d-flex justyfy-content-between  navbar-light blue lighten-4">
+    <a  [routerLink]="['/project/tasks',this.projectId]">Volver</a>
+    <span class="navbar-brand">Crear Tasks</span>
+    <button  class="btn" (click)="logout()">Logout</button>
+  </nav>
+<div class="d-flex justify-content-center mt-4">
+    <div class="card m-2" style="min-width:300px;width: 18rem;">
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit$.next(form)"  class="text-center border border-light p-5" action="#!">
+
+            <p class="h4 mb-4">Task</p>
+
+            <input type="text" formControlName="name" id="" class="form-control mb-4" placeholder="Title">            
+            <app-input-error [control]="this.form.get('name')" [message]="'name'"></app-input-error>
+
+            <textarea id="my-textarea" formControlName="description" class="form-control mb-4" placeholder="Description" rows="3"></textarea>
+            <app-input-error [control]="this.form.get('description')" [message]="'description'"></app-input-error>
+
+            <button class="btn btn-info btn-block my-4" type="submit">Crear</button>
+
+        </form>
+    </div>
+</div>

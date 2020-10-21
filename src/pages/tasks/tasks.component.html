@@ -1,0 +1,26 @@
+
+<nav class="navbar d-flex justyfy-content-between  navbar-light blue lighten-4">
+    <a  [routerLink]="['/home']">Volver</a>
+    <span class="navbar-brand">Tasks</span>
+    <div>
+    <a class="btn" [routerLink]="['/create-tasks',this.projectId]">Crear Task</a>
+    <button  class="btn" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+<div class="container">
+    
+    <div *ngIf="tasks$ | async as tasks;"  class="d-flex flex-wrap flex-lg-row flex-md-row  flex-sm-column flex-column justify-content-center align-items-center ">
+        <ng-container *ngFor="let task of tasks; let i = index; trackBy: trackBy">
+    
+            <div class="card m-2" style="min-width:250px;width: 8rem;">
+                <div class="card-body">
+                <h5 class="card-title">{{task.name}}</h5>
+                <p class="card-text">{{task.description}}</p>
+                <button (click)="onDeleteTask$$.next(task.id)" class="btn btn-danger">Delete</button>
+<!--                 <a class="btn" [routerLink]="['/create-task/', this.projectId,task.id]">Update Task</a>
+ -->            </div>
+            </div>
+        </ng-container>
+    </div>
+    
+</div>
